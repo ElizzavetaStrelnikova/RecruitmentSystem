@@ -8,6 +8,8 @@ namespace RecruitmentSystem.Models
         private string _name;
         private int _id;
         public string Email { get; set; }
+
+        public string Position { get; set; }
         public StatusType Status { get; set; }
         public Test? TestResult { get; set; }
 

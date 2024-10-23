@@ -17,9 +17,49 @@ namespace RecruitmentSystem.Controllers
         }
 
         [HttpGet("vacancies", Name = "GetVacancies")]
-        public IEnumerable<Vacancy> GetVacancies()
+        [Route("[controller]")]
+        public IActionResult GetVacancies(string position = null, string skill = null)
         {
-            return _recruitmentSystem.GetVacancies();
+            try
+            {
+                var vacancies = _recruitmentSystem.GetVacancies(position, skill);
+
+                if (vacancies == null || !vacancies.Any())
+                {
+                    _logger.LogWarning("No vacancies found for the specified criteria.");
+                    return NotFound("No vacancies found.");
+                }
+
+                return Ok(vacancies);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while fetching vacancies.");
+                return StatusCode(500, "Internal server error. Please try again later.");
+            }
+        }
+
+        [HttpGet("candidates", Name = "GetCandidates")]
+        [Route("/resumes?text={position}")]
+        public IActionResult GetCandidates()
+        {
+            try
+            {
+                var candidates = _recruitmentSystem.GetCandidates();
+
+                if (candidates == null || !candidates.Any())
+                {
+                    _logger.LogWarning("No candidates found.");
+                    return NotFound("No candidates found.");
+                }
+
+                return Ok(candidates);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while fetching candidates.");
+                return StatusCode(500, "Internal server error. Please try again later.");
+            }
         }
     }
 }

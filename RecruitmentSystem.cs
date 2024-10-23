@@ -1,3 +1,4 @@
+using RecruitmentSystem.Enums;
 using RecruitmentSystem.Models;
 
 namespace RecruitmentSystem
@@ -5,6 +6,7 @@ namespace RecruitmentSystem
     public class RecruitmentSystem
     {
         private List<Vacancy> vacancies = new List<Vacancy>();
+        private List<Candidate> candidates = new List<Candidate>();
 
         public void AddVacancy(Vacancy vacancy)
         {
@@ -26,9 +28,26 @@ namespace RecruitmentSystem
             }
         }
 
-        public List<Vacancy> GetVacancies()
+        public List<Vacancy> GetVacancies(string position = null, string skill = null)
         {
-            return vacancies.Where(v => !v.IsClosed).ToList();
+            var vacanciesQuery = vacancies.AsQueryable();
+
+            if (!string.IsNullOrEmpty(position))
+            {
+                vacanciesQuery = vacanciesQuery.Where(v => v.Name.Contains(position, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrEmpty(skill))
+            {
+                vacanciesQuery = vacanciesQuery.Where(v => v.Description.Contains(skill, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return vacanciesQuery.Where(v => !v.IsClosed).ToList();
+        }
+
+        public List<Candidate> GetCandidates(string position = null)
+        {
+            return candidates.Where(v => v.Position.Contains(position, StringComparison.OrdinalIgnoreCase)).ToList();
         }
     }
 }
