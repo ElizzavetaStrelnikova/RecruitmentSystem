@@ -22,8 +22,13 @@ namespace RecruitmentSystem
             }
             else
             {
-                Console.WriteLine("Вакансия не найдена.");
+                Console.WriteLine("Вакансия не найдена или уже закрыта.");
             }
+        }
+
+        public List<Vacancy> GetVacancies()
+        {
+            return vacancies.Where(v => !v.IsClosed).ToList();
         }
     }
 }

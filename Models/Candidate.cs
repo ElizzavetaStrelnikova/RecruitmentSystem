@@ -1,4 +1,4 @@
-﻿
+﻿using RecruitmentSystem.Enums;
 using RecruitmentSystem.Interfaces;
 
 namespace RecruitmentSystem.Models
@@ -8,7 +8,7 @@ namespace RecruitmentSystem.Models
         private string _name;
         private int _id;
         public string Email { get; set; }
-        public Status.StatusType Status { get; set; }
+        public StatusType Status { get; set; }
         public Test? TestResult { get; set; }
 
         public Candidate(int id, string name)
@@ -17,10 +17,7 @@ namespace RecruitmentSystem.Models
             _name = name;
         }
 
-        public int Id
-        {
-            get => _id;
-        }
+        public int Id => _id;
 
         public string Name
         {

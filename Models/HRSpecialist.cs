@@ -9,16 +9,14 @@ namespace RecruitmentSystem.Models
     {
         private string _name;
         private int _id;
+
         public HRSpecialist(int id, string name)
         {
             _id = id;
             _name = name;
         }
 
-        public int Id
-        {
-            get => _id;
-        }
+        public int Id => _id;
 
         public string Name
         {
@@ -26,9 +24,9 @@ namespace RecruitmentSystem.Models
             set => _name = value;
         }
 
-        public abstract void AddVacancy();
-        public abstract void CloseVacancy();
-        public abstract void AddCandidant();
-        public abstract void EvaluateCandidant();
+        public abstract void AddVacancy(Vacancy vacancy);
+        public abstract void CloseVacancy(int vacancyId);
+        public abstract void AddCandidate(Candidate candidate);
+        public abstract void EvaluateCandidate(Candidate candidate);
     }
 }

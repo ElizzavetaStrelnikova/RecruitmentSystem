@@ -7,16 +7,14 @@ namespace RecruitmentSystem.Models
     {
         private string _name;
         private int _id;
+
         public Department(int id, string name)
         {
             _id = id;
             _name = name;
         }
 
-        public int Id
-        {
-            get => _id;
-        }
+        public int Id => _id;
 
         public string Name
         {
