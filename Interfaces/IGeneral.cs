@@ -1,6 +1,8 @@
 ﻿namespace RecruitmentSystem.Interfaces
 {
-    public class IGeneral
+    public interface IGeneral
     {
+        static int Id { get; set; }
+        static string Name { get; set; }
     }
 }
