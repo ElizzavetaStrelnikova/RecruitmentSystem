@@ -28,23 +28,6 @@ namespace RecruitmentSystem
             }
         }
 
-        public List<Vacancy> GetVacancies(string position = null, string skill = null)
-        {
-            var vacanciesQuery = vacancies.AsQueryable();
-
-            if (!string.IsNullOrEmpty(position))
-            {
-                vacanciesQuery = vacanciesQuery.Where(v => v.Name.Contains(position, StringComparison.OrdinalIgnoreCase));
-            }
-
-            if (!string.IsNullOrEmpty(skill))
-            {
-                vacanciesQuery = vacanciesQuery.Where(v => v.Description.Contains(skill, StringComparison.OrdinalIgnoreCase));
-            }
-
-            return vacanciesQuery.Where(v => !v.IsClosed).ToList();
-        }
-
         public List<Candidate> GetCandidates(string position = null)
         {
             return candidates.Where(v => v.Position.Contains(position, StringComparison.OrdinalIgnoreCase)).ToList();

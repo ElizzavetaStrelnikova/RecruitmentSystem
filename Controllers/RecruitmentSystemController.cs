@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RecruitmentSystem.Models;
+using RecruitmentSystem.Services;
 
 namespace RecruitmentSystem.Controllers
 {
@@ -7,45 +8,22 @@ namespace RecruitmentSystem.Controllers
     [Route("[controller]")]
     public class RecruitmentSystemController : ControllerBase
     {
-        private readonly RecruitmentSystem _recruitmentSystem;
+        private readonly RecruitmentSystemService _recruitmentSystemService;
         private readonly ILogger<RecruitmentSystemController> _logger;
 
-        public RecruitmentSystemController(RecruitmentSystem recruitmentSystem, ILogger<RecruitmentSystemController> logger)
+        public RecruitmentSystemController(RecruitmentSystemService recruitmentSystemService, ILogger<RecruitmentSystemController> logger)
         {
-            _recruitmentSystem = recruitmentSystem;
+            _recruitmentSystemService = recruitmentSystemService;
             _logger = logger;
-        }
-
-        [HttpGet("vacancies", Name = "GetVacancies")]
-        [Route("[controller]")]
-        public IActionResult GetVacancies(string position = null, string skill = null)
-        {
-            try
-            {
-                var vacancies = _recruitmentSystem.GetVacancies(position, skill);
-
-                if (vacancies == null || !vacancies.Any())
-                {
-                    _logger.LogWarning("No vacancies found for the specified criteria.");
-                    return NotFound("No vacancies found.");
-                }
-
-                return Ok(vacancies);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while fetching vacancies.");
-                return StatusCode(500, "Internal server error. Please try again later.");
-            }
         }
 
         [HttpGet("candidates", Name = "GetCandidates")]
         [Route("/resumes?text={position}")]
-        public IActionResult GetCandidates()
+        public async Task<IActionResult> GetCandidates([FromQuery] string position)
         {
             try
             {
-                var candidates = _recruitmentSystem.GetCandidates();
+                var candidates = await _recruitmentSystemService.GetCandidatesAsync(position);
 
                 if (candidates == null || !candidates.Any())
                 {
@@ -58,6 +36,41 @@ namespace RecruitmentSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while fetching candidates.");
+                return StatusCode(500, "Internal server error. Please try again later.");
+            }
+        }
+
+        [HttpPost("vacancies", Name = "AddVacancy")]
+        public async Task<IActionResult> AddVacancy([FromBody] Vacancy vacancy)
+        {
+            if (vacancy == null)
+            {
+                return BadRequest("Vacancy is null.");
+            }
+
+            try
+            {
+                await _recruitmentSystemService.AddVacancyAsync(vacancy);
+                return CreatedAtAction(nameof(GetCandidates), new { id = vacancy.Id }, vacancy);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while adding a vacancy.");
+                return StatusCode(500, "Internal server error. Please try again later.");
+            }
+        }
+
+        [HttpPut("vacancies/{id}", Name = "CloseVacancy")]
+        public async Task<IActionResult> CloseVacancy(int id)
+        {
+            try
+            {
+                await _recruitmentSystemService.CloseVacancyAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while closing a vacancy.");
                 return StatusCode(500, "Internal server error. Please try again later.");
             }
         }
