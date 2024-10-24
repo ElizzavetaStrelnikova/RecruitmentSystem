@@ -1,0 +1,40 @@
+{
+  "Candidates": [
+    {
+      "Id": 101,
+      "Name": "Сергей Смирнов",
+      "Status": "HasPassedProbation",
+      "HRSpecialistId": 1,
+      "Email": "test@example.com",
+      "Position": "Backend-developer",
+      "Status": "InReview"
+    },
+    {
+      "Id": 102,
+      "Name": "Елена Кузнецова",
+      "Status": "NotPassedProbation",
+      "HRSpecialistId": 1,
+      "Email": "test@example.com",
+      "Position": "Frontend-developer",
+      "Status": "InReview"
+    },
+    {
+      "Id": 103,
+      "Name": "Дмитрий Васильев",
+      "Status": "HasPassedProbation",
+      "HRSpecialistId": 2,
+      "Email": "test@example.com",
+      "Position": "SMM-Specialist",
+      "Status": "InReview"
+    },
+    {
+      "Id": 104,
+      "Name": "Мария Дмитриева",
+      "Status": "HasPassedProbation",
+      "HRSpecialistId": 2,
+      "Email": "test@example.com",
+      "Position": "Manager",
+      "Status": "InReview"
+    }
+  ]
+}

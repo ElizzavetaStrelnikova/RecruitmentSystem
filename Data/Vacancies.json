@@ -1,0 +1,40 @@
+{
+  "Vacancies": [
+    {
+      "Id": 1,
+      "Description": "Разработчик backend",
+      "Department": 1,
+      "IsClosed": false,
+      "Candidates": {
+        "Id": 101
+      }
+    },
+    {
+      "Id": 1,
+      "Description": "Разработчик frontend",
+      "Department": 1,
+      "IsClosed": false,
+      "Candidates": {
+        "Id": 102
+      }
+    },
+    {
+      "Id": 2,
+      "Description": "Специалист по SMM",
+      "Department": 2,
+      "IsClosed": false,
+      "Candidates": {
+        "Id": 103
+      }
+    },
+    {
+      "Id": 3,
+      "Description": "Менеджер по продажам",
+      "Department": 3,
+      "IsClosed": false,
+      "Candidates": {
+        "Id": 104
+      }
+    }
+  ]
+}

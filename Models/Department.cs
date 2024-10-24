@@ -7,7 +7,8 @@ namespace RecruitmentSystem.Models
     {
         public int Id { get; }
         public string Name { get; set; }
-        public HRSpecialist Specialist { get; private set; }
+        public string Description { get; set; } 
+        public HRSpecialist HRSpecialist { get; private set; }
 
         protected Department(int id, string name)
         {
@@ -17,7 +18,7 @@ namespace RecruitmentSystem.Models
 
         public void AssignSpecialist(HRSpecialist specialist)
         {
-            Specialist = specialist;
+            HRSpecialist = specialist;
         }
     }
 }
