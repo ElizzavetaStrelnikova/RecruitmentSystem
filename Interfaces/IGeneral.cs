@@ -2,7 +2,7 @@
 {
     public interface IGeneral
     {
-        static int Id { get; set; }
+        static int Id { get; }
         static string Name { get; set; }
     }
 }

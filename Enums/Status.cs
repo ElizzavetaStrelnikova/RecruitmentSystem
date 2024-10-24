@@ -2,9 +2,11 @@
 {
    public enum StatusType 
    { 
+        InReview,
         Acceptable, 
         Unacceptable, 
-        OnProbation 
+        OnProbation,
+        HasPassedProbation
     }
     
 }

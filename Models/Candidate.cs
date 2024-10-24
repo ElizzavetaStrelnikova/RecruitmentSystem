@@ -1,30 +1,34 @@
-﻿using RecruitmentSystem.Enums;
+﻿using Microsoft.AspNetCore.Routing.Matching;
+using RecruitmentSystem.Enums;
 using RecruitmentSystem.Interfaces;
 
 namespace RecruitmentSystem.Models
 {
     public abstract class Candidate : IGeneral
     {
-        private string _name;
-        private int _id;
+        public int Id { get; private set; }
+        public string Name { get; set; }
         public string Email { get; set; }
-
         public string Position { get; set; }
         public StatusType Status { get; set; }
         public Test? TestResult { get; set; }
+        public int HRSpecialistId { get; set; }
 
         public Candidate(int id, string name)
         {
-            _id = id;
-            _name = name;
+            Id = id;
+            Name = name;
+            Status = StatusType.InReview; 
         }
 
-        public int Id => _id;
-
-        public string Name
+        public void UpdateStatus(StatusType newStatus)
         {
-            get => _name;
-            set => _name = value;
+            Status = newStatus;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} ({Id}) - Status: {Status}";
         }
     }
 }

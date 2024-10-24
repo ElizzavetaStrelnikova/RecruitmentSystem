@@ -1,32 +1,29 @@
 ﻿
 using RecruitmentSystem.Interfaces;
-using System.Security.Cryptography;
-using System.Xml.Linq;
 
 namespace RecruitmentSystem.Models
 {
     public abstract class HRSpecialist : IGeneral
     {
-        private string _name;
-        private int _id;
-
-        public HRSpecialist(int id, string name)
+        public int Id { get; }
+        public string Name { get; set; }
+        public double KPI { get; private set; }
+        protected HRSpecialist(int id, string name)
         {
-            _id = id;
-            _name = name;
+            if (id < 0) throw new ArgumentException("Id не может быть отрицательным", nameof(id));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Имя не может быть пустым", nameof(name));
+
+            Id = id;
+            Name = name;
+            KPI = 0.0; 
         }
 
-        public int Id => _id;
-
-        public string Name
+        public void IncrementKPI(double value)
         {
-            get => _name;
-            set => _name = value;
+            if (value < 0) throw new ArgumentException("Значение должно быть неотрицательным", nameof(value));
+            KPI += value;
         }
-
         public abstract void AddVacancy(Vacancy vacancy);
         public abstract void CloseVacancy(int vacancyId);
-        public abstract void AddCandidate(Candidate candidate);
-        public abstract void EvaluateCandidate(Candidate candidate);
     }
 }

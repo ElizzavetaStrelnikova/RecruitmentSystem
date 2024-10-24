@@ -5,23 +5,19 @@ namespace RecruitmentSystem.Models
 {
     public abstract class Department : IGeneral
     {
-        private string _name;
-        private int _id;
+        public int Id { get; }
+        public string Name { get; set; }
+        public HRSpecialist Specialist { get; private set; }
 
-        public Department(int id, string name)
+        protected Department(int id, string name)
         {
-            _id = id;
-            _name = name;
+            Id = id;
+            Name = name;
         }
 
-        public int Id => _id;
-
-        public string Name
+        public void AssignSpecialist(HRSpecialist specialist)
         {
-            get => _name;
-            set => _name = value;
+            Specialist = specialist;
         }
-
-        public HRSpecialist Specialist { get; set; }
     }
 }
