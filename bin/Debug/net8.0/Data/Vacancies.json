@@ -2,7 +2,7 @@
   "Vacancies": [
     {
       "Id": 1,
-      "Description": "Разработчик backend",
+      "Description": "����������� backend",
       "Department": 1,
       "IsClosed": false,
       "Candidates": {
@@ -11,7 +11,7 @@
     },
     {
       "Id": 1,
-      "Description": "Разработчик frontend",
+      "Description": "����������� frontend",
       "Department": 1,
       "IsClosed": false,
       "Candidates": {
@@ -20,7 +20,7 @@
     },
     {
       "Id": 2,
-      "Description": "Специалист по SMM",
+      "Description": "���������� �� SMM",
       "Department": 2,
       "IsClosed": false,
       "Candidates": {

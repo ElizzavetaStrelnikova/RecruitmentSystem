@@ -43,6 +43,16 @@ namespace RecruitmentSystem
                 Console.WriteLine("Ошибка: Вакансия не найдена или уже закрыта.");
             }
         }
+
+        public List<Candidate> GetCandidates(int vacancyId)
+        {
+            return candidates.Where(c => c.VacancyId == vacancyId).ToList();
+        }
+
+        public HRSpecialist GetHRSpecialist(int specialistId)
+        {
+            return hrSpecialists.FirstOrDefault(hr => hr.Id == specialistId);
+        }
         public List<Candidate> GetCandidates(string position = null)
         {
             return string.IsNullOrEmpty(position)
@@ -53,6 +63,33 @@ namespace RecruitmentSystem
         {
             var candidatesInReview = candidates.Where(c => c.Status == StatusType.InReview && c.Position == vacancy.Description);
             return !candidatesInReview.Any();
+        }
+
+        public void MarkCandidateSuccessful(int candidateId, int vacancyId)
+        {
+            var vacancy = vacancies.FirstOrDefault(v => v.Id == vacancyId);
+            var candidate = candidates.FirstOrDefault(c => c.Id == candidateId);
+
+            if (vacancy == null)
+            {
+                Console.WriteLine("Ошибка: Вакансия не найдена.");
+                return;
+            }
+
+            if (candidate == null)
+            {
+                Console.WriteLine("Ошибка: Кандидат не найден.");
+                return;
+            }
+
+            if (vacancy.IsClosed)
+            {
+                Console.WriteLine("Ошибка: Вакансия уже закрыта.");
+                return;
+            }
+
+            candidate.MarkSuccessful(vacancy);
+            Console.WriteLine($"Кандидат '{candidate.Name}' был помечен как успешный для вакансии '{vacancy.Description}'.");
         }
         private void CalculateKPI()
         {

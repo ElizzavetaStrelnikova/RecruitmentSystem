@@ -4,7 +4,7 @@ using RecruitmentSystem.Interfaces;
 
 namespace RecruitmentSystem.Models
 {
-    public abstract class Candidate : IGeneral
+    public class Candidate : IGeneral
     {
         public int Id { get; private set; }
         public string Name { get; set; }
@@ -13,6 +13,10 @@ namespace RecruitmentSystem.Models
         public StatusType Status { get; set; }
         public Test? TestResult { get; set; }
         public int HRSpecialistId { get; set; }
+
+        public bool IsSuccessful { get; set; }
+
+        public int VacancyId { get; set; }
 
         public Candidate(int id, string name)
         {
@@ -29,6 +33,23 @@ namespace RecruitmentSystem.Models
         public override string ToString()
         {
             return $"{Name} ({Id}) - Status: {Status}";
+        }
+
+        public void MarkSuccessful(Vacancy vacancy)
+        {
+            if (VacancyId == vacancy.Id)
+            {
+                IsSuccessful = true;
+            }
+            else
+            {
+                Console.WriteLine("Ошибка: Кандидат не подал заявку на эту вакансию.");
+            }
+        }
+
+        public bool HasPassed(Vacancy vacancy)
+        {
+            return IsSuccessful && VacancyId == vacancy.Id;
         }
     }
 }

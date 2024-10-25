@@ -4,13 +4,13 @@ using RecruitmentSystem.Interfaces;
 
 namespace RecruitmentSystem.Models
 {
-    public abstract class Vacancy : IGeneral
+    public class Vacancy : IGeneral
     {
-        public int Id { get; }
+        public int Id { get; set; }
         public string Description { get; set; }
-        public bool IsClosed { get; private set; }
+        public bool IsClosed { get; set; }
         public Department Department { get; set; }
-        public List<Candidate> Candidates { get; private set; } = new List<Candidate>();
+        public List<Candidate> Candidates { get; set; } = new List<Candidate>();
         public Vacancy(int id, string description)
         {
             Id = id;

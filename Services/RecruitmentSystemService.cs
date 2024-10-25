@@ -25,7 +25,7 @@ namespace RecruitmentSystem.Services
         public async Task AddVacancyAsync(Vacancy vacancy)
         {
             await Task.Run(() => _recruitmentSystem.AddVacancy(vacancy));
-            _logger.LogInformation($"Vacancy '{vacancy.Name}' added.");
+            _logger.LogInformation($"Vacancy '{vacancy.Description}' added.");
         }
 
         public async Task CloseVacancyAsync(int vacancyId)

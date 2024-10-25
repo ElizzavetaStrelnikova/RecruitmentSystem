@@ -3,7 +3,7 @@ using RecruitmentSystem.Interfaces;
 
 namespace RecruitmentSystem.Models
 {
-    public abstract class HRSpecialist : IGeneral
+    public class HRSpecialist : IGeneral
     {
         public int Id { get; }
         public string Name { get; set; }
@@ -23,7 +23,7 @@ namespace RecruitmentSystem.Models
             if (value < 0) throw new ArgumentException("Значение должно быть неотрицательным", nameof(value));
             KPI += value;
         }
-        public abstract void AddVacancy(Vacancy vacancy);
-        public abstract void CloseVacancy(int vacancyId);
+        public void AddVacancy(Vacancy vacancy) { }
+        public void CloseVacancy(int vacancyId) { }
     }
 }

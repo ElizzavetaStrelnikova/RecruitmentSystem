@@ -1,6 +1,6 @@
 ﻿namespace RecruitmentSystem.Models
 {
-    public abstract class Test
+    public class Test
     {
         public bool Passed { get; private set; }
         protected Test(bool passed)

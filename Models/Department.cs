@@ -3,7 +3,7 @@ using RecruitmentSystem.Interfaces;
 
 namespace RecruitmentSystem.Models
 {
-    public abstract class Department : IGeneral
+    public class Department : IGeneral
     {
         public int Id { get; }
         public string Name { get; set; }
